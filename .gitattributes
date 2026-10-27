@@ -1,0 +1,8 @@
+# 统一用 LF：脚本要跑在 Linux 上，CRLF 会导致 $'\r' 错误
+* text=auto eol=lf
+
+*.sh    text eol=lf
+*.sql   text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf

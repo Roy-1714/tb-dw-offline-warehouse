@@ -1,0 +1,488 @@
+{
+  "processDefinition": {
+    "id": 2,
+    "code": 23465045574688,
+    "name": "tb_dw_daily_etl",
+    "version": 1,
+    "releaseState": "ONLINE",
+    "projectCode": 23464296537888,
+    "description": "淘宝用户行为离线数仓：ODS->DWD->DWS->ADS->导出，10 节点串行",
+    "globalParams": "[{\"prop\": \"do_date\", \"direct\": \"IN\", \"type\": \"VARCHAR\", \"value\": \"$[yyyy-MM-dd]\", \"desc\": \"业务日期，回溯时手动覆盖\"}]",
+    "globalParamList": [
+      {
+        "prop": "do_date",
+        "direct": "IN",
+        "type": "VARCHAR",
+        "value": "$[yyyy-MM-dd]"
+      }
+    ],
+    "globalParamMap": {
+      "do_date": "$[yyyy-MM-dd]"
+    },
+    "createTime": "2026-10-23 18:24:29",
+    "updateTime": "2026-10-23 18:24:29",
+    "flag": "YES",
+    "userId": 1,
+    "userName": null,
+    "projectName": null,
+    "locations": "{\"7710000000001\": {\"name\": \"01_ods_load\", \"targetarr\": \"\", \"x\": 120, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000002\": {\"name\": \"02_dim_date_init\", \"targetarr\": \"\", \"x\": 270, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000003\": {\"name\": \"03_dwd_detail_1d\", \"targetarr\": \"\", \"x\": 420, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000004\": {\"name\": \"04_dim_item\", \"targetarr\": \"\", \"x\": 570, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000005\": {\"name\": \"05_dws_user_1d\", \"targetarr\": \"\", \"x\": 720, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000006\": {\"name\": \"06_dws_item_category_1d\", \"targetarr\": \"\", \"x\": 870, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000007\": {\"name\": \"07_dws_nd_td\", \"targetarr\": \"\", \"x\": 1020, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000008\": {\"name\": \"08_ads_core_1d\", \"targetarr\": \"\", \"x\": 1170, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000009\": {\"name\": \"09_ads_topic_1d\", \"targetarr\": \"\", \"x\": 1320, \"y\": 200, \"nodewarn\": 0, \"isError\": false}, \"7710000000010\": {\"name\": \"10_export_mysql\", \"targetarr\": \"\", \"x\": 1470, \"y\": 200, \"nodewarn\": 0, \"isError\": false}}",
+    "scheduleReleaseState": null,
+    "timeout": 0,
+    "tenantId": 1,
+    "tenantCode": "atguigu",
+    "modifyBy": null,
+    "warningGroupId": 0
+  },
+  "taskDefinitionList": [
+    {
+      "id": 11,
+      "code": 7710000000001,
+      "name": "01_ods_load",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/01_ods_load.sh",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 12,
+      "code": 7710000000002,
+      "name": "02_dim_date_init",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/02_dim_date_init.sh",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 13,
+      "code": 7710000000003,
+      "name": "03_dwd_detail_1d",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/03_dwd_detail_1d.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 14,
+      "code": 7710000000004,
+      "name": "04_dim_item",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/04_dim_item.sh",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 15,
+      "code": 7710000000005,
+      "name": "05_dws_user_1d",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/05_dws_user_1d.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 16,
+      "code": 7710000000006,
+      "name": "06_dws_item_category_1d",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/06_dws_item_category_1d.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 17,
+      "code": 7710000000007,
+      "name": "07_dws_nd_td",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/07_dws_nd_td.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 18,
+      "code": 7710000000008,
+      "name": "08_ads_core_1d",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/08_ads_core_1d.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 19,
+      "code": 7710000000009,
+      "name": "09_ads_topic_1d",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/09_ads_topic_1d.sh ${do_date}",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    },
+    {
+      "id": 20,
+      "code": 7710000000010,
+      "name": "10_export_mysql",
+      "version": 1,
+      "description": "",
+      "projectCode": 23464296537888,
+      "userId": 1,
+      "taskType": "SHELL",
+      "taskParams": {
+        "resourceList": [],
+        "localParams": [],
+        "rawScript": "bash /home/atguigu/offline-dw/script/10_export_mysql.sh",
+        "conditionResult": {
+          "successNode": [
+            ""
+          ],
+          "failedNode": [
+            ""
+          ]
+        },
+        "dependence": {}
+      },
+      "taskParamList": [],
+      "taskParamMap": {},
+      "flag": "YES",
+      "taskPriority": "MEDIUM",
+      "userName": null,
+      "projectName": null,
+      "workerGroup": "default",
+      "environmentCode": -1,
+      "failRetryTimes": 0,
+      "failRetryInterval": 1,
+      "timeoutFlag": "CLOSE",
+      "timeoutNotifyStrategy": "WARN",
+      "timeout": 0,
+      "delayTime": 0,
+      "resourceIds": "",
+      "createTime": "2026-10-23 18:24:29",
+      "updateTime": "2026-10-23 18:24:29",
+      "modifyBy": null,
+      "operator": 1,
+      "operateTime": "2026-10-23 18:24:29",
+      "dependence": "{}"
+    }
+  ]
+}
