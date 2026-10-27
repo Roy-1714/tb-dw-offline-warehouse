@@ -68,9 +68,42 @@ offline-dw/
 │   ├── 00_env.sh           公共环境 + run_sql / run_sql_date
 │   ├── 00_backfill.sh      9 天回溯编排
 │   ├── 01_ods_load.sh ~  10_export_mysql.sh   10 个调度节点脚本
-└── scheduler/
-    └── ds_build_workflow.py 用 DS 2.0.5 API 建 10 节点工作流
+├── scheduler/
+│   └── ds_build_workflow.py 用 DS 2.0.5 API 建 10 节点工作流
+└── dashboard/
+    └── superset_build.py    用 Superset API 建数据源/数据集/图表/看板
 ```
+
+## 可视化看板（Superset）
+
+| 项 | 值 |
+|---|---|
+| 地址 | **http://192.168.150.102:8088** |
+| 账号 | `admin` / `admin123` |
+| 看板 | 「淘宝用户行为数仓看板」`/superset/dashboard/tb-dw-dashboard/` |
+| 数据源 | MySQL `tb_dw_report`（10 张 ADS 镜像表） |
+| 图表 | 6 张：总 UV 大数字卡、每日 UV/PV 趋势、行为漏斗、类目 Top10、分时活跃、商品集中度 |
+
+**一键重建**（数据集、图表、看板全用 API 创建，可重复执行）：
+
+```bash
+/opt/module/miniconda3/envs/superset/bin/python dashboard/superset_build.py step1    # 数据源 + 10 数据集
+/opt/module/miniconda3/envs/superset/bin/python dashboard/superset_build.py step2    # 6 张图表
+/opt/module/miniconda3/envs/superset/bin/python dashboard/superset_build.py step3    # 看板 + 布局
+/opt/module/miniconda3/envs/superset/bin/python dashboard/superset_build.py verify2  # 逐张验证出数
+```
+
+**机器重启后拉起 Superset**：
+
+```bash
+cd /opt/module/miniconda3/envs/superset/bin
+SUPERSET_CONFIG_PATH=/opt/module/superset/superset_config.py \
+  nohup ./superset run -h 0.0.0.0 -p 8088 --with-threads > /opt/module/superset/superset.log 2>&1 &
+```
+
+> 两个 Superset 6.1 的坑：
+> ① 旧接口 `explore_json` 已不注册 `table`/`big_number_total` 这类可视化，验证图表出数要用 `/api/v1/chart/data`；
+> ② 指标必须显式定义，`SUM(uv)` 这种字符串会报 `Metric does not exist`，要用 adhoc metric 对象。
 
 ## 环境要求
 
